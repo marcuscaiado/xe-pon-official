@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✧XE・PON♡✧ // OFFICIAL CYBER PORTAL | BREAK THE LIMIT#2</title>
+  <meta name="description" content="Official website for ✧XE・PON♡✧. Stream the 5 full tracks from Xe Pon _ NEON & FRICTION and the new single BREAK THE LIMIT#2." />
+
+  <!-- Google Fonts: Space Grotesk, JetBrains Mono, Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700;800&family=Noto+Sans+JP:wght@400;700;900&family=Space+Grotesk:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Cyber Canvas Animation Background -->
+  <canvas id="cyber-canvas"></canvas>
+  <div class="crt-scanline"></div>
+  <div class="vignette-overlay"></div>
+
+  <!-- Hidden Native Audio Player Engine -->
+  <audio id="native-audio" preload="metadata"></audio>
+
+  <!-- HUD Top Navigation Bar -->
+  <header class="hud-header">
+    <div class="hud-container">
+      <a href="#" class="hud-brand">
+        <div class="brand-avatar-mini">
+          <img src="assets/street-eating.png" alt="✧XE・PON♡✧" />
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">✧XE・PON♡✧</span>
+          <span class="brand-sub">NEON & FRICTION // OFFICIAL PORTAL</span>
+        </div>
+      </a>
+
+      <nav class="hud-nav" id="hud-nav">
+        <a href="#hero" class="nav-item active"><span class="nav-idx">01</span> <span data-i18n="nav_home">HOME</span></a>
+        <a href="#showcase" class="nav-item"><span class="nav-idx">02</span> <span data-i18n="nav_showcase">TRACK SHOWCASE (5 SONGS)</span></a>
+        <a href="#playlist" class="nav-item"><span class="nav-idx">03</span> <span data-i18n="nav_playlist">PLAYLIST (5 TRACKS)</span></a>
+        <a href="#toei-comms" class="nav-item"><span class="nav-idx">04</span> <span data-i18n="nav_toei">TOEI COMMS</span></a>
+      </nav>
+
+      <div class="hud-actions">
+        <!-- Language Switcher: EN / JA -->
+        <div class="lang-switcher" id="lang-switcher" aria-label="Language selection">
+          <button class="btn-lang active" data-lang="en" aria-label="English">EN</button>
+          <span class="lang-slash">/</span>
+          <button class="btn-lang" data-lang="ja" aria-label="Japanese">JA</button>
+        </div>
+
+        <div class="hud-status-chip">
+          <span class="pulse-indicator"></span>
+          <span class="status-label" id="playback-status-badge" data-i18n="status_ready">READY TO PLAY</span>
+        </div>
+        <a href="https://app.phase.app.br/?artist=a02db54f-13c9-4c9f-bb95-4b505880dcc2" target="_blank" rel="noopener noreferrer" class="btn-holo-nav">
+          <span data-i18n="nav_artist_phase">PHASE ARTIST</span>
+          <span class="nav-icon">↗</span>
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="section-container hero-grid">
+        <div class="hero-content">
+          <div class="badge-row">
+            <div class="cyber-badge badge-pink">
+              <span class="badge-dot"></span> <span data-i18n="badge_new_release">NEW RELEASE // SINGLE</span>
+            </div>
+            <div class="cyber-badge badge-blue">
+              <span class="badge-dot"></span> <span data-i18n="badge_bpm_energy">HIGH VOLTAGE // 100% PUNK ENERGY</span>
+            </div>
+            <div class="cyber-badge badge-white">
+              <span class="badge-dot"></span> <span data-i18n="badge_phase_tracks">16 SONGS ON PHASE</span>
+            </div>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="hero-title-top" data-i18n="hero_title_top">JAPANESE POST-HARDCORE & PUNK</span>
+            <span class="hero-title-glitch" data-text="✧XE・PON♡✧">✧XE・PON♡✧</span>
+            <span class="hero-kanji-sub" data-i18n="hero_kanji_sub">BREAK THE LIMIT#2 「叫べ！夜を切り裂いて光を掴め！」</span>
+          </h1>
+
+          <p class="hero-desc" data-i18n="hero_desc">
+            Wall-of-sound production driven by high-gain guitars, high-velocity dynamic skank drumming, furious double-kick pedals, and raw female rock chest vocals. Stream the 5 featured tracks from <em>NEON & FRICTION</em> directly on site, or explore ✧XE・PON♡✧'s full 16-song catalogue on <strong>Phase</strong>.
+          </p>
+
+          <div class="hero-cta-group">
+            <button class="btn-cyber btn-pink" id="hero-play-featured-btn">
+              <span class="btn-icon">▶</span>
+              <span data-i18n="btn_play_single">PLAY NEW SINGLE</span>
+              <span class="btn-sub">BREAK THE LIMIT#2 • CLIMAX SINGLE</span>
+            </button>
+
+            <a href="#playlist" class="btn-cyber btn-blue">
+              <span class="btn-icon">📻</span>
+              <span data-i18n="btn_view_playlist">VIEW ALL 5 TRACKS</span>
+              <span class="btn-sub">PLAYLIST NEON & FRICTION</span>
+            </a>
+
+            <button id="open-lyrics-btn" class="btn-cyber btn-ghost">
+              <span class="btn-icon">📜</span>
+              <span data-i18n="btn_lyrics_notes">LYRICS & DIRECTION</span>
+              <span class="btn-sub" data-i18n="btn_sub_production">PRODUCTION SPECS (ALL 5 SONGS)</span>
+            </button>
+          </div>
+
+          <!-- Metrics Telemetry -->
+          <div class="hero-telemetry">
+            <div class="telemetry-item">
+              <span class="telemetry-val text-blue">4</span>
+              <span class="telemetry-lbl" data-i18n="stat_members">BAND MEMBERS</span>
+            </div>
+            <div class="telemetry-divider"></div>
+            <div class="telemetry-item">
+              <span class="telemetry-val text-pink">16</span>
+              <span class="telemetry-lbl" data-i18n="stat_phase_songs">SONGS ON PHASE</span>
+            </div>
+            <div class="telemetry-divider"></div>
+            <div class="telemetry-item">
+              <span class="telemetry-val text-white">5</span>
+              <span class="telemetry-lbl" data-i18n="stat_tracks">READY ON SITE</span>
+            </div>
+            <div class="telemetry-divider"></div>
+            <div class="telemetry-item">
+              <span class="telemetry-val text-blue">100+</span>
+              <span class="telemetry-lbl" data-i18n="stat_toei">TOEI CALLS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="cyber-frame-wrapper">
+            <div class="hud-corner top-left"></div>
+            <div class="hud-corner top-right"></div>
+            <div class="hud-corner bottom-left"></div>
+            <div class="hud-corner bottom-right"></div>
+
+            <div class="frame-inner">
+              <img src="assets/arcade-follow.jpg" alt="✧XE・PON♡✧ in Akihabara (all 4 members)" class="hero-image" id="hero-showcase-img" />
+              <div class="hologram-scan"></div>
+              
+              <div class="hero-holo-tag tag-top">
+                <span class="tag-signal"></span>
+                <span data-i18n="hero_tag_top">✧XE・PON♡✧ // ALL 4 MEMBERS (FULL LINEUP)</span>
+              </div>
+
+              <div class="hero-holo-tag tag-bottom">
+                <div class="holo-mini-equalizer">
+                  <span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <span data-i18n="hero_tag_bottom">LOCAL AUDIO ACTIVE: 5 TRACKS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 01: Interactive 5-Track Showcase & Deep Dive -->
+    <section id="showcase" class="single-section">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-badge"><span class="badge-dot"></span> <span data-i18n="sec1_badge">01 // TRACK SHOWCASE (ALL 5 SONGS)</span></div>
+          <h2 class="section-title">NEON & FRICTION <span class="highlight-pink" data-i18n="sec1_kanji">SOUND PROFILE</span></h2>
+          <p class="section-subtitle" data-i18n="sec1_sub">
+            Explore the sonic direction, Tokyo street locations, lyrics, and musical identity behind all 5 original tracks.
+          </p>
+        </div>
+
+        <!-- Interactive 5-Track Selector Tabs -->
+        <div class="showcase-tabs-container" id="showcase-tabs" role="tablist">
+          <button class="showcase-tab-btn" data-track-idx="0"><span class="tab-num">01</span> ASTRAL SHIBUYA OVERDRIVE</button>
+          <button class="showcase-tab-btn" data-track-idx="1"><span class="tab-num">02</span> ZANGAI</button>
+          <button class="showcase-tab-btn" data-track-idx="2"><span class="tab-num">03</span> BREAK THE LIMIT#1</button>
+          <button class="showcase-tab-btn" data-track-idx="3"><span class="tab-num">04</span> HIBANA</button>
+          <button class="showcase-tab-btn active" data-track-idx="4"><span class="tab-num">05 ★</span> BREAK THE LIMIT#2</button>
+        </div>
+
+        <div class="cyber-card single-feature-card">
+          <div class="single-feature-grid">
+            <div class="single-cover-column">
+              <div class="single-cover-frame">
+                <!-- PHOTO OF THE 4 GIRLS -->
+                <img src="assets/street-eating.png" alt="✧XE・PON♡✧ eating and laughing together" class="single-cover-img" id="showcase-cover-img" />
+                <div class="cover-glow-tag" id="showcase-bpm-tag">★ CLIMAX SINGLE</div>
+              </div>
+
+              <div class="single-quick-stats">
+                <!-- LOCATION ONLY (Model, Finish, Energy, Duration removed) -->
+                <div class="stat-pill-location">
+                  <span class="loc-icon">📍</span>
+                  <div class="loc-body">
+                    <span class="loc-label" data-i18n="pill_location_lbl">LOCATION</span>
+                    <span class="loc-val" id="showcase-location-val">Shibuya Back-Alley Street Food Stall, Tokyo</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="single-info-column">
+              <div class="single-genres-row" id="showcase-genres-row">
+                <span class="genre-tag tag-pink">POST-HARDCORE</span>
+                <span class="genre-tag tag-blue">JAPANESE ALTERNATIVE ROCK</span>
+                <span class="genre-tag tag-white">MELODIC PUNK</span>
+                <span class="genre-tag tag-gray">DARK • INTENSE • BOLD</span>
+              </div>
+
+              <h3 class="single-track-title" id="showcase-track-title">BREAK THE LIMIT#2</h3>
+              <h4 class="single-track-sub" id="showcase-track-sub">✧XE・PON♡✧ • Featured Single & Climax (Track 05)</h4>
+
+              <div class="single-direction-box">
+                <span class="direction-tag" id="showcase-direction-tag" data-i18n="direction_header">// TRACK OVERVIEW & SOUND PROFILE</span>
+                <p class="direction-text" id="showcase-direction-body">
+                  The flagship anthem and crowning achievement of the release. Blistering high-speed skank drumming meets stadium-sized distorted power chords and rapid melodic leads. The solo female vocal performance commands the spotlight with an unapologetic, emotionally strained chest belt and fierce grit that feels like the ultimate anime shonen climax. An unstoppable rush of friction, speed, and raw hope.
+                </p>
+              </div>
+
+              <!-- Lyric Teaser -->
+              <div class="single-lyric-box">
+                <div class="lyric-box-head">
+                  <span class="lyric-box-tag" id="showcase-lyric-tag" data-i18n="chorus_tag">CHORUS HIGHLIGHT // サビ</span>
+                  <button class="lyric-expand-link" id="lyric-expand-btn" data-i18n="btn_expand_lyrics">VIEW FULL LYRICS 📜</button>
+                </div>
+                <blockquote class="lyric-box-quote" id="showcase-lyric-quote">
+                  "Scream! Tear through the night and seize the light!<br>
+                  Burn this life amidst the rubble!<br>
+                  I don't need anyone's salvation — I'll carve out the future with my own hands!"
+                </blockquote>
+              </div>
+
+              <div class="single-actions-bar">
+                <!-- IN-SITE PLAY BUTTON -->
+                <button class="btn-cyber btn-pink btn-large play-single-btn" id="showcase-play-btn" data-track-index="4">
+                  <span class="btn-icon play-icon">▶</span>
+                  <span class="play-btn-text" data-i18n="btn_play_onsite">PLAY ON SITE</span>
+                  <span class="btn-sub" id="showcase-btn-sub">HI-RES AUDIO</span>
+                </button>
+
+                <!-- PHASE LINK -->
+                <a href="https://app.phase.app.br/?track=a49e18b4-39cf-44f6-8f29-9f5dbebeed17" target="_blank" rel="noopener noreferrer" class="btn-cyber btn-ghost btn-large" id="showcase-phase-link">
+                  <span class="btn-icon">⚡</span>
+                  <span data-i18n="btn_stream_phase">STREAM ON PHASE</span>
+                  <span class="btn-sub" data-i18n="btn_sub_open_app">OPEN IN OFFICIAL APP ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 02: Official Playlist (Xe Pon _ NEON & FRICTION) -->
+    <section id="playlist" class="playlist-section">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-badge"><span class="badge-dot"></span> <span data-i18n="sec2_badge">02 // OFFICIAL PLAYLIST (5 TRACKS ON SITE)</span></div>
+          <h2 class="section-title">Xe Pon _ NEON & FRICTION <span class="highlight-blue" data-i18n="sec2_kanji">OFFICIAL PLAYLIST</span></h2>
+          <p class="section-subtitle" data-i18n="sec2_sub">
+            Play any of the <strong>5 original songs</strong> directly in the site's integrated cyber player or launch on Phase.
+          </p>
+        </div>
+
+        <!-- Playlist Banner Card -->
+        <div class="cyber-card playlist-banner-card">
+          <div class="playlist-banner-left">
+            <div class="playlist-cover-art">
+              <img src="assets/street-eating.png" alt="Playlist Cover" />
+              <span class="playlist-badge-5" data-i18n="badge_5_songs">5 TRACKS</span>
+            </div>
+            <div class="playlist-banner-text">
+              <span class="playlist-sub-tag" data-i18n="playlist_sub_tag">IN-SITE AUDIO READY</span>
+              <h3 class="playlist-main-title">Xe Pon _ NEON & FRICTION</h3>
+              <p class="playlist-meta-info" data-i18n="playlist_meta_info">
+                Artist: <strong>✧XE・PON♡✧</strong> • 5 Tracks • Japanese Alternative Rock / Post-Hardcore
+              </p>
+            </div>
+          </div>
+          <div class="playlist-banner-right">
+            <button class="btn-cyber btn-pink" id="play-all-playlist-btn">
+              <span class="btn-icon">▶</span>
+              <span data-i18n="btn_play_all">PLAY ALL ON SITE</span>
+            </button>
+            <a href="https://app.phase.app.br/?playlist=b392a597-c9d1-41c5-9a60-cb4bcec35135" target="_blank" rel="noopener noreferrer" class="btn-cyber btn-blue">
+              <span class="btn-icon">📻</span>
+              <span data-i18n="btn_open_phase">OPEN IN PHASE ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- The 5 Exact Tracks List With Direct Audio Playback -->
+        <div class="tracks-list-wrapper">
+          <div class="tracks-header-row">
+            <span data-i18n="th_track"># TRACK & TITLE</span>
+            <span data-i18n="th_genre">GENRE / MOOD</span>
+            <span data-i18n="th_duration">DURATION</span>
+            <span data-i18n="th_action">PLAYBACK & PHASE</span>
+          </div>
+
+          <div class="tracks-items-container" id="tracks-container">
+            <!-- Track 1 -->
+            <div class="track-item-row" data-index="0" data-track-id="8c124227-9d14-43c1-aaaa-847472eb1d95">
+              <div class="track-col-title">
+                <button class="track-play-inline-btn" data-index="0" aria-label="Play Astral Shibuya Overdrive">▶</button>
+                <span class="track-num">01</span>
+                <div>
+                  <h4 class="track-name">ASTRAL SHIBUYA OVERDRIVE</h4>
+                  <span class="track-artist">✧XE・PON♡✧</span>
+                </div>
+              </div>
+              <div class="track-col-genre">
+                <span class="tag-blue">Japanese Alt Rock</span>
+                <span class="tag-gray">Electronic Pop</span>
+              </div>
+              <div class="track-col-duration">3:34</div>
+              <div class="track-col-action">
+                <button class="btn-cue-mini track-play-inline-btn" data-index="0"><span class="inline-cue-text" data-i18n="btn_play_inline">▶ PLAY</span></button>
+                <a href="https://app.phase.app.br/?track=8c124227-9d14-43c1-aaaa-847472eb1d95" target="_blank" rel="noopener noreferrer" class="btn-stream-link">PHASE ↗</a>
+              </div>
+            </div>
+
+            <!-- Track 2 -->
+            <div class="track-item-row" data-index="1" data-track-id="6cabef0e-061d-4697-b5dd-6152ea718683">
+              <div class="track-col-title">
+                <button class="track-play-inline-btn" data-index="1" aria-label="Play Zangai">▶</button>
+                <span class="track-num">02</span>
+                <div>
+                  <h4 class="track-name">ZANGAI</h4>
+                  <span class="track-artist">✧XE・PON♡✧</span>
+                </div>
+              </div>
+              <div class="track-col-genre">
+                <span class="tag-pink">Math Rock</span>
+                <span class="tag-gray">Japanese Alt Rock</span>
+              </div>
+              <div class="track-col-duration">3:30</div>
+              <div class="track-col-action">
+                <button class="btn-cue-mini track-play-inline-btn" data-index="1"><span class="inline-cue-text" data-i18n="btn_play_inline">▶ PLAY</span></button>
+                <a href="https://app.phase.app.br/?track=6cabef0e-061d-4697-b5dd-6152ea718683" target="_blank" rel="noopener noreferrer" class="btn-stream-link">PHASE ↗</a>
+              </div>
+            </div>
+
+            <!-- Track 3 -->
+            <div class="track-item-row" data-index="2" data-track-id="db4daa95-648c-4518-b21c-8d8affa7437b">
+              <div class="track-col-title">
+                <button class="track-play-inline-btn" data-index="2" aria-label="Play BreakTheLimit#1">▶</button>
+                <span class="track-num">03</span>
+                <div>
+                  <h4 class="track-name">BREAK THE LIMIT#1</h4>
+                  <span class="track-artist">✧XE・PON♡✧</span>
+                </div>
+              </div>
+              <div class="track-col-genre">
+                <span class="tag-pink">Post-Hardcore</span>
+                <span class="tag-blue">Electronic Pop</span>
+              </div>
+              <div class="track-col-duration">3:26</div>
+              <div class="track-col-action">
+                <button class="btn-cue-mini track-play-inline-btn" data-index="2"><span class="inline-cue-text" data-i18n="btn_play_inline">▶ PLAY</span></button>
+                <a href="https://app.phase.app.br/?track=db4daa95-648c-4518-b21c-8d8affa7437b" target="_blank" rel="noopener noreferrer" class="btn-stream-link">PHASE ↗</a>
+              </div>
+            </div>
+
+            <!-- Track 4 -->
+            <div class="track-item-row" data-index="3" data-track-id="bc0b1e00-c033-4072-922f-a11d77c036d3">
+              <div class="track-col-title">
+                <button class="track-play-inline-btn" data-index="3" aria-label="Play Hibana">▶</button>
+                <span class="track-num">04</span>
+                <div>
+                  <h4 class="track-name">HIBANA</h4>
+                  <span class="track-artist">✧XE・PON♡✧</span>
+                </div>
+              </div>
+              <div class="track-col-genre">
+                <span class="tag-pink">Post-Hardcore</span>
+                <span class="tag-white">Japanese Alt Rock</span>
+              </div>
+              <div class="track-col-duration">3:25</div>
+              <div class="track-col-action">
+                <button class="btn-cue-mini track-play-inline-btn" data-index="3"><span class="inline-cue-text" data-i18n="btn_play_inline">▶ PLAY</span></button>
+                <a href="https://app.phase.app.br/?track=bc0b1e00-c033-4072-922f-a11d77c036d3" target="_blank" rel="noopener noreferrer" class="btn-stream-link">PHASE ↗</a>
+              </div>
+            </div>
+
+            <!-- Track 5 (Featured Single) -->
+            <div class="track-item-row row-featured" data-index="4" data-track-id="a49e18b4-39cf-44f6-8f29-9f5dbebeed17">
+              <div class="track-col-title">
+                <button class="track-play-inline-btn" data-index="4" aria-label="Play BreakTheLimit#2">▶</button>
+                <span class="track-num text-pink">05 ★</span>
+                <div>
+                  <h4 class="track-name text-pink">BREAK THE LIMIT#2 <span class="hit-badge" data-i18n="badge_new_hit">FEATURED SINGLE</span></h4>
+                  <span class="track-artist">✧XE・PON♡✧</span>
+                </div>
+              </div>
+              <div class="track-col-genre">
+                <span class="tag-pink">Post-Hardcore</span>
+                <span class="tag-blue">Anthemic Climax</span>
+              </div>
+              <div class="track-col-duration">3:45</div>
+              <div class="track-col-action">
+                <button class="btn-cue-mini track-play-inline-btn" data-index="4"><span class="inline-cue-text" data-i18n="btn_play_inline">▶ PLAY</span></button>
+                <a href="https://app.phase.app.br/?track=a49e18b4-39cf-44f6-8f29-9f5dbebeed17" target="_blank" rel="noopener noreferrer" class="btn-stream-link stream-pink">PHASE ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Discography Callout Card (All 16 Songs on Phase) -->
+        <div class="cyber-card discography-callout-card">
+          <div class="disco-callout-left">
+            <span class="disco-badge" data-i18n="disco_badge">⚡ COMPLETE DISCOGRAPHY // PHASE</span>
+            <h4 class="disco-title" data-i18n="disco_title">ALL 16 SONGS STREAMING ON PHASE</h4>
+            <p class="disco-desc" data-i18n="disco_desc">
+              Beyond the 5 featured tracks on <em>NEON & FRICTION</em>, stream ✧XE・PON♡✧'s full 16-song catalogue of Japanese post-hardcore, alternative rock, and melodic punk directly on the official Phase platform.
+            </p>
+          </div>
+          <div class="disco-callout-right">
+            <a href="https://app.phase.app.br/?artist=a02db54f-13c9-4c9f-bb95-4b505880dcc2" target="_blank" rel="noopener noreferrer" class="btn-cyber btn-pink btn-large">
+              <span class="btn-icon">⚡</span>
+              <span data-i18n="btn_explore_16">STREAM ALL 16 SONGS ON PHASE</span>
+              <span class="btn-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 03: 100+ Missed Calls from Toei Animation (ONLY ONCE ON THE SITE) -->
+    <section id="toei-comms" class="toei-section">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-badge"><span class="badge-dot"></span> <span data-i18n="sec3_badge">03 // TOEI TRANSMISSION</span></div>
+          <h2 class="section-title">100+ MISSED CALLS <span class="highlight-pink" data-i18n="sec3_kanji">STUDIO ALERT</span></h2>
+          <p class="section-subtitle" data-i18n="sec3_sub">
+            When your tracks sound so much like an anime opening that major studios won't stop ringing.
+          </p>
+        </div>
+
+        <div class="toei-terminal-grid">
+          <div class="toei-visual-frame cyber-card">
+            <div class="terminal-bar">
+              <span class="term-dot red"></span>
+              <span class="term-dot yellow"></span>
+              <span class="term-dot green"></span>
+              <span class="term-title" data-i18n="toei_terminal_title">COMMS_LOG // TOEI_ANIMATION.PDU</span>
+            </div>
+            <div class="toei-image-wrap" data-gallery-idx="3" role="button" tabindex="0" aria-label="Click to expand photo" title="Click to view photo">
+              <img src="assets/toei-missed-calls.png" alt="100+ Missed Calls Toei Animation" class="toei-image" />
+              <div class="image-glitch-badge">
+                <span class="alert-pulse"></span> <span data-i18n="toei_alert_badge">100+ MISSED CALLS: TOEI ANIMATION</span>
+              </div>
+              <div class="gallery-hover-overlay">
+                <span class="gallery-zoom-icon">🔍</span>
+                <span class="gallery-zoom-label" data-i18n="lbl_zoom_photo">CLICK TO EXPAND</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="toei-log-panel cyber-card">
+            <div class="log-panel-header">
+              <span class="log-status" data-i18n="toei_log_status">INCOMING CALL OVERFLOW // DO NOT DISTURB ON</span>
+              <span class="log-freq" data-i18n="toei_log_freq">ARTIST: ✧XE・PON♡✧</span>
+            </div>
+
+            <div class="comms-messages-list">
+              <div class="comm-msg-item msg-urgent">
+                <div class="comm-msg-meta">
+                  <span class="sender-tag" data-i18n="toei_sender_1">TOEI ANIMATION // CHIEF PRODUCER SUZUKI</span>
+                  <span class="time-tag" data-i18n="toei_time_1">3:42 AM (CALL #47)</span>
+                </div>
+                <div class="comm-msg-body" data-i18n="toei_msg_1">
+                  "PLEASE PICK UP YOUR PHONES!! 😭 The director heard BREAK THE LIMIT#2 and literally threw out the entire storyboard for the season finale just to sync the climax fight to your chorus. We don't care what your manager asks for, name your price!! JUST STOP LEAVING US ON READ!"
+                </div>
+              </div>
+
+              <div class="comm-msg-item msg-urgent">
+                <div class="comm-msg-meta">
+                  <span class="sender-tag" data-i18n="toei_sender_2">TOEI ANIMATION // MUSIC PRODUCTION DESK</span>
+                  <span class="time-tag" data-i18n="toei_time_2">4:15 AM (CALL #89)</span>
+                </div>
+                <div class="comm-msg-body" data-i18n="toei_msg_2">
+                  "Urgent: Who authorized all 4 of you to turn on 'Do Not Disturb' during band practice?! We have three animators in the studio crying with their headphones on. The fall season broadcast deadline is in two weeks. PLEASE CALL BACK."
+                </div>
+              </div>
+
+              <div class="comm-msg-item">
+                <div class="comm-msg-meta">
+                  <span class="sender-tag" data-i18n="toei_sender_3">SHIBUYA LIVEHOUSE // FRONT DESK</span>
+                  <span class="time-tag" data-i18n="toei_time_3">4:21 AM (CALL #102)</span>
+                </div>
+                <div class="comm-msg-body" data-i18n="toei_msg_3">
+                  "Uhh girls... there's a guy in a tailored suit with a Toei Animation VIP badge literally pacing outside the back door waiting for your rehearsal to finish. Did you guys rob an anime studio or what? 💀"
+                </div>
+              </div>
+            </div>
+
+            <div class="log-cta-box">
+              <a href="https://app.phase.app.br/?artist=a02db54f-13c9-4c9f-bb95-4b505880dcc2" target="_blank" rel="noopener noreferrer" class="btn-cyber btn-pink btn-wide">
+                <span data-i18n="btn_follow_phase">FOLLOW ✧XE・PON♡✧ ON PHASE</span>
+                <span class="btn-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photos Gallery (Streetwear and Tokyo Streets) -->
+        <div class="gallery-grid">
+          <div class="gallery-item cyber-card" data-gallery-idx="0" role="button" tabindex="0" aria-label="View photo Akihabara GiGO">
+            <div class="gallery-img-wrap">
+              <img src="assets/arcade-follow.jpg" alt="Akihabara GiGO Neon" />
+              <div class="gallery-hover-overlay">
+                <span class="gallery-zoom-icon">🔍</span>
+                <span class="gallery-zoom-label" data-i18n="lbl_zoom_photo">CLICK TO EXPAND</span>
+              </div>
+            </div>
+            <div class="gallery-cap" data-i18n="cap_akiba">AKIHABARA GIGO // ALL 4 MEMBERS</div>
+          </div>
+          <div class="gallery-item cyber-card" data-gallery-idx="1" role="button" tabindex="0" aria-label="View photo Shibuya Back-Alley">
+            <div class="gallery-img-wrap">
+              <img src="assets/street-eating.png" alt="✧XE・PON♡✧ eating and laughing together" />
+              <div class="gallery-hover-overlay">
+                <span class="gallery-zoom-icon">🔍</span>
+                <span class="gallery-zoom-label" data-i18n="lbl_zoom_photo">CLICK TO EXPAND</span>
+              </div>
+            </div>
+            <div class="gallery-cap" data-i18n="cap_street">SHIBUYA BACK-ALLEY // DOWNTIME & FOOD</div>
+          </div>
+          <div class="gallery-item cyber-card" data-gallery-idx="2" role="button" tabindex="0" aria-label="View photo Chrome Streetwear">
+            <div class="gallery-img-wrap">
+              <img src="assets/band-collage.jpg" alt="✧XE・PON♡✧ Streetwear" />
+              <div class="gallery-hover-overlay">
+                <span class="gallery-zoom-icon">🔍</span>
+                <span class="gallery-zoom-label" data-i18n="lbl_zoom_photo">CLICK TO EXPAND</span>
+              </div>
+            </div>
+            <div class="gallery-cap" data-i18n="cap_chrome">CHROME STREETWEAR // SESSIONS</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lyrics Modal for BREAK THE LIMIT#2 -->
+  <div id="lyrics-modal" class="lyrics-modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-dialog cyber-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-chip" data-i18n="modal_chip">OFFICIAL LYRICS & PRODUCTION NOTES // ✧XE・PON♡✧</span>
+          <h3 class="modal-song-title" id="modal-song-title">BREAK THE LIMIT#2</h3>
+          <span class="modal-meta-tag" id="modal-song-meta">Japanese Post-Hardcore • Track 05 • Featured Single</span>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close">✕</button>
+      </div>
+
+      <!-- Modal Track Selector Tabs for ALL 5 SONGS -->
+      <div class="modal-tabs-bar" id="modal-tabs-bar" role="tablist">
+        <button class="modal-tab-btn" data-modal-track-idx="0">01 ASTRAL SHIBUYA</button>
+        <button class="modal-tab-btn" data-modal-track-idx="1">02 ZANGAI</button>
+        <button class="modal-tab-btn" data-modal-track-idx="2">03 BREAK LIMIT#1</button>
+        <button class="modal-tab-btn" data-modal-track-idx="3">04 HIBANA</button>
+        <button class="modal-tab-btn active" data-modal-track-idx="4">05 BREAK LIMIT#2 ★</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="lyrics-content" id="modal-lyrics-content">
+          <!-- Populated dynamically by renderModalLyrics(trackIdx) -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cyber btn-pink" id="modal-play-btn" data-track-index="4">
+          <span class="btn-icon">▶</span>
+          <span data-i18n="modal_btn_play">PLAY THIS TRACK ON SITE</span>
+        </button>
+        <button class="btn-cyber btn-ghost" id="modal-close-footer" data-i18n="modal_btn_close">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Picture Lightbox Modal (Full Uncropped View with Minimize Control) -->
+  <div id="picture-modal" class="picture-modal" aria-hidden="true">
+    <div class="modal-backdrop" id="picture-backdrop"></div>
+    <div class="picture-dialog cyber-card">
+      <div class="picture-header">
+        <div class="picture-title-wrap">
+          <span class="pic-chip">✧XE・PON♡✧ // BAND ARCHIVE</span>
+          <h3 class="pic-photo-title" id="picture-modal-title">AKIHABARA GIGO // ALL 4 MEMBERS</h3>
+          <span class="pic-meta-tag" id="picture-modal-loc">Akihabara GiGO Arcade, Tokyo</span>
+        </div>
+        <div class="picture-window-controls">
+          <button class="win-ctrl-btn btn-minimize" id="picture-minimize-btn" title="Minimize to corner" aria-label="Minimize">
+            <span>🗕</span>
+            <span class="ctrl-tip" data-i18n="tip_minimize">MINIMIZE</span>
+          </button>
+          <button class="win-ctrl-btn btn-close" id="picture-close-btn" title="Close" aria-label="Close">✕</button>
+        </div>
+      </div>
+
+      <div class="picture-body">
+        <button class="pic-nav-btn btn-prev" id="picture-prev-btn" aria-label="Previous photo">‹</button>
+        <div class="picture-frame">
+          <img src="assets/arcade-follow.jpg" alt="✧XE・PON♡✧ photo" id="picture-modal-img" />
+        </div>
+        <button class="pic-nav-btn btn-next" id="picture-next-btn" aria-label="Next photo">›</button>
+      </div>
+
+      <div class="picture-footer">
+        <div class="pic-counter" id="picture-counter">PHOTO 01 / 04</div>
+        <div class="pic-actions">
+          <button class="btn-cyber btn-ghost btn-mini" id="picture-footer-minimize-btn">
+            <span>🗕</span> <span data-i18n="btn_minimize_pip">MINIMIZE TO CORNER</span>
+          </button>
+          <button class="btn-cyber btn-pink btn-mini" id="picture-close-footer" data-i18n="modal_btn_close">CLOSE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Minimized Picture Widget (Picture-in-Picture Dock) -->
+  <aside id="picture-mini-viewer" class="picture-mini-viewer cyber-card" aria-hidden="true">
+    <div class="mini-viewer-bar">
+      <div class="mini-title-wrap">
+        <span class="mini-dot"></span>
+        <span class="mini-label" id="mini-viewer-title">✧XE・PON♡✧ [MINIMIZED]</span>
+      </div>
+      <div class="mini-controls">
+        <button class="mini-btn btn-expand" id="mini-viewer-expand-btn" title="Expand to full view" aria-label="Expand">⤢</button>
+        <button class="mini-btn btn-close" id="mini-viewer-close-btn" title="Close" aria-label="Close">✕</button>
+      </div>
+    </div>
+    <div class="mini-img-wrap" id="mini-viewer-click-target" role="button" tabindex="0" title="Click to expand">
+      <img src="assets/arcade-follow.jpg" alt="✧XE・PON♡✧ minimized photo" id="mini-viewer-img" />
+      <div class="mini-expand-overlay">
+        <span>⤢ <strong data-i18n="mini_click_expand">CLICK TO EXPAND</strong></span>
+      </div>
+    </div>
+    <div class="mini-caption-bar" id="mini-viewer-caption">
+      AKIHABARA GIGO // ALL 4 MEMBERS
+    </div>
+  </aside>
+
+  <!-- Persistent Full Cyber Audio Player Dock (Bottom HUD) -->
+  <footer class="cyber-dock">
+    <div class="dock-container">
+      <!-- Player Transport Controls & Current Track Info -->
+      <div class="dock-left">
+        <div class="dock-controls">
+          <button class="dock-ctrl-btn" id="dock-prev-btn" aria-label="Previous track">⏮</button>
+          <button class="dock-play-btn" id="dock-play-btn" aria-label="Play or pause">▶</button>
+          <button class="dock-ctrl-btn" id="dock-next-btn" aria-label="Next track">⏭</button>
+        </div>
+
+        <div class="dock-track-info">
+          <span class="dock-track-title" id="dock-track-title">✧XE・PON♡✧ // BREAK THE LIMIT#2</span>
+          <span class="dock-track-meta" id="dock-track-meta" data-i18n="dock_meta_default">TRACK 05 OF 05 • CLIMAX SINGLE • LOCAL AUDIO READY</span>
+        </div>
+      </div>
+
+      <!-- Scrubber Timeline & Audio Visualizer -->
+      <div class="dock-center">
+        <div class="dock-progress-wrapper">
+          <span class="dock-time" id="dock-current-time">0:00</span>
+          <div class="dock-progress-bar-bg" id="dock-progress-container" aria-label="Audio scrubber">
+            <div class="dock-progress-bar-fill" id="dock-progress-fill"></div>
+          </div>
+          <span class="dock-time" id="dock-total-time">3:45</span>
+        </div>
+
+        <div class="dock-visualizer" id="dock-visualizer">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <!-- Volume & Phase Action Links -->
+      <div class="dock-right">
+        <div class="dock-volume-wrap">
+          <button class="dock-vol-btn" id="dock-vol-btn" aria-label="Mute toggle">🔊</button>
+          <input type="range" class="dock-vol-slider" id="dock-vol-slider" min="0" max="1" step="0.05" value="0.8" aria-label="Volume slider" />
+        </div>
+
+        <a href="https://app.phase.app.br/?track=a49e18b4-39cf-44f6-8f29-9f5dbebeed17" target="_blank" rel="noopener noreferrer" class="btn-dock btn-dock-pink" id="dock-phase-btn">
+          <span data-i18n="dock_btn_phase">OPEN IN PHASE</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
