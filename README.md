@@ -2,6 +2,8 @@
 
 Official web portal and interactive cyber player for **✧XE・PON♡✧** (ゼ・ポン), the Japanese Post-Hardcore & Alternative Rock 4-piece idol/rock group.
 
+🌐 **Live Website**: [https://marcuscaiado.github.io/xe-pon-official/](https://marcuscaiado.github.io/xe-pon-official/)
+
 Stream the 5 original tracks from ***NEON & FRICTION*** directly in your browser with high-resolution audio, explore Tokyo filming locations and sound profiles, view uncropped photo archives with floating Picture-in-Picture mode, and dive into the full 16-song discography on [Phase](https://app.phase.app.br/?artist=a02db54f-13c9-4c9f-bb95-4b505880dcc2).
 
 ---
